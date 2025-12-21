@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🧱 중국어덩어리훈련 🧱</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jindam1799.github.io/Deong-uh-ri_game/" />
+    <meta property="og:title" content="🧱 중국어덩어리훈련 🧱" />
+    <meta property="og:description" content="10일 동안 100문장을 반복·확장하며 훈련하는 중국어학습게임">
+    <meta property="og:image" content="https://jindam1799.github.io/Deong-uh-ri_game/images/logo.png">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🧱 중국어덩어리훈련 🧱<h1>
+      </header>
+
+      <div id="intro-popup" class="popup">
+        <div class="popup-content">
+          <h2>🧱 중국어덩어리훈련 🧱</h2>
+          <h5 class="subtitle-center">"덩어리로 툭! 말문이 트인다"</h5>
+          <br />
+          <p>
+            <strong>중국어를 쉽게 말할 수 있게
+              돕고 싶다는 마음에서 시작된
+              훈련 게임입니다.</strong>
+            <br />
+            <strong>'중국어 덩어리훈련'은 어순이
+              곧 어법인 중국어를 덩어리로
+              익히며, 문장이 입에서
+              자연스럽게 나오도록
+              설계되었습니다.</strong>
+            <br />
+          </p>
+          <p class="highlight-red">"입에서 '툭' 튀어나올 수
+            있도록 하는 것"이 목표!
+            버튼을 누르며 '소리'를 내지
+            않으면 효과적이지 않습니다.</p>
+          <p>10일 동안 하루 10문장씩,
+            총 100문장을 반복·확장하며
+            훈련하세요. 단어가 아니라
+            덩어리로, 공부가 아니라
+            반복으로, 문장이 툭! 나올 거예요.</p>
+          <p>🎯 효과적으로 공부하는 법
+            훈련영상 또는 훈련서로 먼저
+            연습한 뒤, 복습용으로 이
+            게임을 활용하면 효과는 두 배!</p>
+          <p class="compact-text">🎥 훈련영상: 유튜브 <중툭튀, 진담></p>
+          <p class="compact-text">📘 교재: <중국어덩어리훈련서> (출간 예정)</p>
+          <p class="compact-credit">🌟 제작 : 전진아 </p>
+          <p class="compact-credit">🌟 개발 : Dukimi</p>
+          <div class="button-container">
+            <button id="start-game">게임 시작하기</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="day-selection" class="hidden">
+        <h3>학습할 Day를 선택하세요</h3>
+        <div class="day-buttons">
+          <!-- 자바스크립트로 동적 생성 -->
+        </div>
+      </div>
+
+      <div id="game-area" class="hidden">
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+
+        <div class="game-header">
+          <div class="sentence-info">
+            <span id="current-day"></span>
+            <span id="sentence-count"></span>
+          </div>
+          <div class="timer">남은 시간: <span id="time-left"></span>초</div>
+        </div>
+
+        <div class="sentence-display">
+          <p id="korean-sentence">한국어 문장이 여기에 표시됩니다.</p>
+        </div>
+
+        <div class="card-area">
+          <div class="answer-area">
+            <div id="placed-cards" class="card-container">
+              <!-- 배치된 카드들이 여기에 표시됩니다 -->
+            </div>
+          </div>
+
+          <div id="available-cards" class="card-container">
+            <!-- 사용할 수 있는 카드들이 여기에 표시됩니다 -->
+          </div>
+        </div>
+
+        <div class="control-buttons">
+          <button id="check-button">확인하기</button>
+        </div>
+      </div>
+
+      <div id="review-popup" class="popup hidden">
+        <div class="popup-content">
+          <h3 id="completed-day">Day <span id="day-number"></span></h3>
+          <h2>오늘 입에 익힌 10문장</h2>
+          <h4 class="review-instruction">이 화면 캡쳐 후 단톡방에 인증!</h4>
+          <h5 class="review-note">(게임 특성상 부호는 생략 되었습니다.)</h5>
+          <div id="review-sentences">
+            <!-- 복습할 문장들이 여기에 표시됩니다 -->
+          </div>
+          <div class="button-container">
+            <button id="finish-review">완료</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 버전 변수 정의 (업데이트마다 변경)
+      const GAME_VERSION = "1.0.2";
+      
+      // 캐시 무효화 및 버전 확인
+      (function() {
+        const savedVersion = localStorage.getItem('gameVersion');
+        
+        if (savedVersion !== GAME_VERSION) {
+          console.log('새 버전 감지: 게임 초기화');
+          localStorage.clear();
+          localStorage.setItem('dayUnlocked_1', 'true');
+          localStorage.setItem('gameVersion', GAME_VERSION);
+        }
+      })();
+    </script>
+    <script src="sentences.js?v=1.0.0"></script>
+    <script src="script.js?v=1.0.0"></script>
+  </body>
+</html>
