@@ -261,10 +261,13 @@ document.addEventListener('DOMContentLoaded', () => {
         audioChunks = [];
         mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
         mediaRecorder.onstop = () => {
-          const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+          // 브라우저가 녹음한 원본 포맷(mediaRecorder.mimeType)을 그대로 사용하도록 변경
+          const audioBlob = new Blob(audioChunks, {
+            type: mediaRecorder.mimeType || 'audio/webm',
+          });
           myRecordedAudioUrl = URL.createObjectURL(audioBlob);
           myRecordedAudioObj = new Audio(myRecordedAudioUrl);
-          btnPlayMyVoice.disabled = false; // 내 발음 듣기 버튼 활성화
+          btnPlayMyVoice.disabled = false;
         };
         mediaRecorder.start();
         btnRecordVoice.innerText = '🛑 멈추기';
