@@ -1,4 +1,3 @@
-/* --- 변수 설정 (테마 컬러) --- */
 :root {
   --main-color: #f4c84d;
   --main-dark: #d9aa32;
@@ -19,7 +18,6 @@
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
-
 body,
 html {
   width: 100%;
@@ -28,13 +26,11 @@ html {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
-
 #app {
   width: 100%;
   height: 100%;
   position: relative;
 }
-
 .screen {
   display: none;
   width: 100%;
@@ -43,12 +39,9 @@ html {
   align-items: center;
   justify-content: center;
 }
-
 .screen.active {
   display: flex;
 }
-
-/* --- 공통 유틸리티 --- */
 .hidden {
   display: none !important;
 }
@@ -56,7 +49,7 @@ html {
   margin-top: 20px;
 }
 
-/* --- 타이포그래피 --- */
+/* 텍스트 & 공통 */
 .logo-title {
   font-size: 42px;
   color: var(--main-dark);
@@ -68,8 +61,19 @@ html {
   font-size: 16px;
   margin-bottom: 15px;
 }
+.primary-btn {
+  padding: 14px 30px;
+  font-size: 18px;
+  background-color: var(--main-color);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(244, 200, 77, 0.4);
+  cursor: pointer;
+}
 
-/* --- 팝업 스타일 --- */
+/* --- 팝업 --- */
 #popup-overlay {
   position: fixed;
   top: 0;
@@ -89,7 +93,7 @@ html {
   border-radius: 20px;
   z-index: 101;
   text-align: center;
-  width: 90%;
+  width: 92%;
   max-width: 400px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
@@ -98,15 +102,15 @@ html {
   color: var(--main-dark);
 }
 .popup p {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.5;
   color: #555;
 }
-
-/* 정답 팝업 세부 */
 .success-title {
   color: #4caf50 !important;
 }
+
+/* 성공 팝업 내 문장 박스 */
 .completed-sentence-box {
   background: var(--bg-color);
   padding: 15px;
@@ -114,24 +118,58 @@ html {
   margin: 15px 0;
 }
 #success-korean {
-  font-size: 14px;
-  color: #777;
+  font-size: 16px;
+  color: #555;
   margin-bottom: 8px;
+  font-weight: bold;
 }
 #success-chinese {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
   color: var(--text-color);
 }
-.popup-actions {
+
+/* 녹음 버튼 영역 */
+.recorder-box {
+  margin-top: 15px;
+  padding: 12px;
+  background: #fff8e1;
+  border-radius: 12px;
+}
+.recorder-guide {
+  font-size: 12px !important;
+  color: #888 !important;
+  margin-bottom: 10px;
+}
+.voice-btns {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 15px;
-  margin-top: 20px;
+  gap: 8px;
+}
+.btn-voice {
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 20px;
+  border: 2px solid var(--main-color);
+  background: white;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-voice:disabled {
+  opacity: 0.4;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+.btn-voice.recording {
+  background-color: #ff5252;
+  color: white;
+  border-color: #ff5252;
+  animation: pulse 1s infinite;
 }
 
-/* 복습 팝업 리스트 영역 */
+/* 복습 리스트 (틀린 문제 강조 및 폰트 차별화) */
 .review-container {
   max-height: 45vh;
   overflow-y: auto;
@@ -141,41 +179,38 @@ html {
 }
 .review-item {
   background: var(--bg-color);
-  padding: 12px;
+  padding: 15px;
   border-radius: 10px;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: 2px solid transparent;
+}
+.review-item.mistake-highlight {
+  border-color: #ff5252;
+  background: #fff0f0;
+} /* 틀린 문장 강조 */
+.review-text {
+  flex: 1;
+  padding-right: 10px;
 }
 .review-text .r-korean {
-  font-size: 12px;
-  color: #888;
-  margin-bottom: 4px;
-}
+  font-size: 18px;
+  color: #000;
+  font-weight: 800;
+  margin-bottom: 6px;
+} /* 한국어 크고 검게 */
 .review-text .r-chinese {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text-color);
-}
-
-/* --- 버튼 디자인 --- */
-.primary-btn {
-  padding: 14px 30px;
-  font-size: 18px;
-  background-color: var(--main-color);
-  color: #fff;
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(244, 200, 77, 0.4);
-  cursor: pointer;
-}
+  font-size: 16px;
+  font-weight: 600;
+  color: #888;
+} /* 한자 회색으로 */
 .icon-btn {
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
-  background-color: var(--slot-bg);
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  background-color: var(--card-bg);
   border: 2px solid var(--main-color);
   border-radius: 50%;
   cursor: pointer;
@@ -183,13 +218,8 @@ html {
   align-items: center;
   justify-content: center;
 }
-.icon-btn.small {
-  width: 40px;
-  height: 40px;
-  font-size: 18px;
-}
 
-/* --- 인트로 & 로비 --- */
+/* --- 게임 UI --- */
 .intro-content {
   text-align: center;
   animation: bounce-soft 2s infinite;
@@ -209,25 +239,15 @@ html {
   background-color: var(--card-bg);
   color: var(--main-dark);
   font-weight: 800;
-  box-shadow: 0 4px 0 var(--main-color);
-  transition: all 0.1s;
   cursor: pointer;
 }
-.grid-container button:active {
-  transform: translateY(4px);
-  box-shadow: 0 0 0 var(--main-color);
-}
 
-/* --- 게임 화면 --- */
 #screen-game {
-  justify-content: flex-start;
   padding: 20px;
-  transition: background-color 0.4s ease;
+  justify-content: flex-start;
 }
-
 #screen-game.is-final {
   background-color: #fff8e1;
-  box-shadow: inset 0 0 30px rgba(244, 200, 77, 0.4);
 }
 #screen-game.is-final .korean-box {
   border-color: #e57373;
@@ -282,8 +302,6 @@ html {
   font-size: 14px;
   font-weight: 800;
 }
-
-/* 예쁜 한국어 문장 박스 */
 .korean-box {
   background-color: var(--card-bg);
   border: 2px solid var(--main-color);
@@ -302,7 +320,6 @@ html {
   word-break: keep-all;
 }
 
-/* --- 단어 슬롯 및 카드 --- */
 .game-board,
 .game-controls {
   width: 100%;
@@ -326,7 +343,6 @@ html {
   gap: 12px;
   justify-content: center;
 }
-
 .word-card {
   display: flex;
   flex-direction: column;
@@ -338,9 +354,7 @@ html {
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(244, 200, 77, 0.2);
   cursor: pointer;
-  transition:
-    transform 0.1s,
-    opacity 0.2s;
+  transition: transform 0.1s;
   min-width: 70px;
 }
 .word-card:active {
@@ -362,7 +376,7 @@ html {
   font-weight: 800;
 }
 
-/* --- 애니메이션 --- */
+/* 애니메이션 */
 .shake-screen {
   animation: shake-hard 0.4s ease-in-out;
 }
@@ -387,5 +401,16 @@ html {
   }
   50% {
     transform: translateY(-10px);
+  }
+}
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
   }
 }
