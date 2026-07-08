@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
   btnRecordVoice.addEventListener('click', async () => {
     if (mediaRecorder && mediaRecorder.state === 'recording') {
       mediaRecorder.stop();
-      btnRecordVoice.innerText = '🎙️ 녹음완료 (다시녹음)';
+      btnRecordVoice.innerText = '🎙️ 다시녹음';
       btnRecordVoice.classList.remove('recording');
     } else {
       try {
