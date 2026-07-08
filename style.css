@@ -141,32 +141,46 @@ html {
   color: #888 !important;
   margin-bottom: 10px;
 }
-.voice-btns {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
+/* --- 녹음 버튼 영역 모바일 핏 최적화 --- */
+.voice-btns { 
+    display: flex; 
+    justify-content: center; 
+    gap: 8px; 
+    flex-wrap: wrap; /* 화면이 좁을 경우 자연스럽게 통째로 줄바꿈 허용 */
 }
-.btn-voice {
-  padding: 8px 12px;
-  font-size: 13px;
-  font-weight: bold;
-  border-radius: 20px;
-  border: 2px solid var(--main-color);
-  background: white;
-  color: var(--text-color);
-  cursor: pointer;
-  transition: all 0.2s;
+
+.btn-voice { 
+    padding: 8px 5px; 
+    font-size: 13px; 
+    font-weight: bold; 
+    border-radius: 20px; 
+    border: 2px solid var(--main-color); 
+    background: white; 
+    color: var(--text-color); 
+    cursor: pointer; 
+    transition: all 0.2s; 
+    white-space: nowrap; /* 핵심: 버튼 안에서 글씨가 두 줄로 쪼개지는 것 방지 */
+    flex: 1 1 auto; /* 버튼 3개가 공간을 공평하게 나눠 가지도록 설정 */
 }
-.btn-voice:disabled {
-  opacity: 0.4;
-  border-color: #ccc;
-  cursor: not-allowed;
+
+.btn-voice:disabled { 
+    opacity: 0.4; 
+    border-color: #ccc; 
+    cursor: not-allowed; 
 }
-.btn-voice.recording {
-  background-color: #ff5252;
-  color: white;
-  border-color: #ff5252;
-  animation: pulse 1s infinite;
+
+.btn-voice.recording { 
+    background-color: #ff5252; 
+    color: white; 
+    border-color: #ff5252; 
+    animation: pulse 1s infinite; 
+}
+
+/* --- 다음 문장 버튼 여백 띄우기 --- */
+.popup-actions { 
+    margin-top: 25px; /* 네모 블록과 맞닿지 않도록 시원한 여백 추가 */
+    display: flex; 
+    justify-content: center; 
 }
 
 /* 복습 리스트 (틀린 문제 강조 및 폰트 차별화) */
