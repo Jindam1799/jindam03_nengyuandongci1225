@@ -8,6 +8,21 @@
     />
     <title>진담중국어 - 중국어 문장 배열 게임</title>
     <link rel="stylesheet" href="style.css" />
+    <script>
+      (function () {
+        const userAgent = navigator.userAgent.toLowerCase();
+
+        // 카카오톡 인앱 브라우저이고, 안드로이드인 경우
+        if (
+          userAgent.indexOf('kakaotalk') > -1 &&
+          userAgent.indexOf('android') > -1
+        ) {
+          location.href =
+            'kakaotalk://web/openExternal?url=' +
+            encodeURIComponent(window.location.href);
+        }
+      })();
+    </script>
   </head>
   <body>
     <audio id="bgm-lobby" src="lobby.mp3" loop></audio>
